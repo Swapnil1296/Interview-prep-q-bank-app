@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
-import InterviewPrepApp from './compnonts/InterviewPrepApp';
-import ExcelToJsonConverter from './compnonts/ExcelToJsonConverter';
+import InterviewPrepApp from './components/InterviewPrepApp';
+import ExcelToJsonConverter from './components/ExcelToJsonConverter';
 import { javascriptQuestionData } from './utils/javascriptQuestionData';
 import { reactQuesionData } from './utils/reacQuestiondata';
 import { Menu, X } from 'lucide-react';
 import { htmlAndCSS } from './utils/htmlCss';
 import { reduxRtk } from './utils/reduxRtk';
 import { nextJs } from './utils/nextJs';
+import { postman } from './utils/postman';
+import { systemDesign } from './utils/systemDesign';
+import { Axios } from './utils/axios';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState('interview');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const dataSources = {
+    htmlAndCSS,
     reactQuesionData,
     javascriptQuestionData,
-    htmlAndCSS,
     reduxRtk,
-    nextJs
+    nextJs,
+    postman,
+    systemDesign,
+    Axios
   };
 
   const handleNavClick = (component) => {
