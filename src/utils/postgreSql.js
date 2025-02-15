@@ -1,0 +1,1 @@
+export const postgreSql=[{id:1}]

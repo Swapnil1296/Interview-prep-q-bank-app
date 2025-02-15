@@ -10,6 +10,7 @@ const ExcelToJsonConverter = () => {
 
     const handleFileUpload = async (event) => {
         setJsonData([]);
+        setFileName("")
         const file = event.target.files[0];
         if (file) {
             setFileName(file.name);

@@ -1,0 +1,1 @@
+export const typescript = [{id:1}]
