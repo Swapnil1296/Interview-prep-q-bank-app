@@ -27,26 +27,73 @@ const topics = [
 ];
 
 const FormattedText = ({ text }) => {
-  return (
-    <>
-      {text?.split("\n").map((line, index) => (
-        <React.Fragment key={index}>
-          {line?.trim() && (
-            <p
-              className={`mb-3 ${
-                line?.endsWith(":")
-                  ? "font-medium mt-4 text-cyan-500"
-                  : "text-cyan-200"
-              }`}
-            >
-              {line}
-            </p>
-          )}
-        </React.Fragment>
-      ))}
-    </>
-  );
+  const numberEmojis = {
+    '0': '0️⃣',
+    '1': '1️⃣',
+    '2': '2️⃣',
+    '3': '3️⃣',
+    '4': '4️⃣',
+    '5': '5️⃣',
+    '6': '6️⃣',
+    '7': '7️⃣',
+    '8': '8️⃣',
+    '9': '9️⃣'
+  };
+
+  const formatText = (text) => {
+    // Skip if already contains emoji numbers
+    if (/[0-9]️⃣/.test(text)) return text;
+
+    // Convert standalone numbers to emojis
+    return text.replace(/\b(\d)\b/g, (match, digit) => 
+      numberEmojis[digit] || match
+    );
+  };
+
+  const processLine = (line) => {
+    // Check if the line is a heading (ends with ":")
+    const isHeading = line.trim().endsWith(":");
+    
+    // Format the line with emoji processing
+    const formattedLine = formatText(line);
+    
+    return (
+      <p
+        key={line}
+        className={`mb-3 ${
+          isHeading ? "font-medium mt-4 text-cyan-500" : "text-cyan-200"
+        }`}
+        dangerouslySetInnerHTML={{ __html: formattedLine.trim() }}
+      />
+    );
+  };
+
+  const processText = (text) => {
+    if (!text) return null;
+    
+    // Split by double newlines to separate paragraphs
+    const paragraphs = text.split(/\n\n+/);
+    
+    return paragraphs.map((paragraph, index) => {
+      // If paragraph contains single newlines, split and process each line
+      if (paragraph.includes('\n')) {
+        const lines = paragraph.split('\n');
+        return (
+          <div key={index} className="mb-4">
+            {lines.map((line, lineIndex) => 
+              line.trim() && processLine(line)
+            )}
+          </div>
+        );
+      }
+      // Process single paragraph
+      return paragraph.trim() && processLine(paragraph);
+    });
+  };
+
+  return <div className="space-y-2">{processText(text)}</div>;
 };
+
 
 const InterviewPrepApp = ({ dataSources }) => {
   const [activeTab, setActiveTab] = useState("react");
@@ -208,8 +255,8 @@ const InterviewPrepApp = ({ dataSources }) => {
                     className="flex justify-between cursor-pointer items-start group"
                     onClick={() => handleQuestionClick(question?.id)}
                   >
-                    <h3 className="text-lg font-medium text-cyan-300 flex-1 group-hover:text-cyan-400 transition-colors">
-                      <span className="font-semibold text-lg text-cyan-500 first-letter:capitalize">
+                    <h3 className="text-lg font-medium text-cyan-300 flex-1 group-hover:text-cyan-400 transition-colors first-letter:capitalize">
+                      <span className="font-semibold text-lg text-cyan-500 ">
                         {index + 1}:
                       </span>{" "}
                       {question?.question}
