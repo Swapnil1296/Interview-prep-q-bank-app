@@ -27,6 +27,23 @@ const topics = [
 ];
 
 const FormattedText = ({ text }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Standard mobile breakpoint
+    };
+
+    // Initial check
+    checkIfMobile();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
   const numberEmojis = {
     '0': '0️⃣',
     '1': '1️⃣',
@@ -44,10 +61,14 @@ const FormattedText = ({ text }) => {
     // Skip if already contains emoji numbers
     if (/[0-9]️⃣/.test(text)) return text;
 
-    // Convert standalone numbers to emojis
-    return text.replace(/\b(\d)\b/g, (match, digit) => 
-      numberEmojis[digit] || match
-    );
+    // Convert standalone numbers based on device type
+    return text.replace(/\b(\d)\b/g, (match, digit) => {
+      if (isMobile) {
+        return `<span class="inline-flex items-center justify-center w-6 h-6 text-sm font-semibold bg-cyan-500/20 text-cyan-400 rounded-full mx-1">${digit}</span>`;
+      } else {
+        return numberEmojis[digit] || match;
+      }
+    });
   };
 
   const processLine = (line) => {
@@ -93,6 +114,7 @@ const FormattedText = ({ text }) => {
 
   return <div className="space-y-2">{processText(text)}</div>;
 };
+
 
 
 const InterviewPrepApp = ({ dataSources }) => {
