@@ -16,7 +16,7 @@ const topics = [
   { id: "rtk", name: "Redux&Rtk", dataSource: "reduxRtk" },
   { id: "next", name: "NextJs", dataSource: "nextJs" },
   { id: "axios", name: "Axios", dataSource: "Axios" },
-  { id: "rrd", name: "Router-Dom", dataSource: "reactRouter" },
+  { id: "rrd", name: "Router", dataSource: "reactRouter" },
   { id: "typescript", name: "Typescript", dataSource: "typescript" },
   { id: "git&github", name: "Git/Github", dataSource: "gitHub" },
   { id: "node", name: "NodeJS", dataSource: "nodeJS" },
