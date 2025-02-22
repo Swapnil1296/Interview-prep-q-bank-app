@@ -1069,5 +1069,26 @@ export const javascriptQuestionData = [
     "keyFeatures": [],
     "actionWords": [],
     "codeExample": ""
+  }, {
+    "id": 72,
+    "topic": "javascript",
+    "question": "What is a first-class function in Javascript?",
+    "answer": "In JavaScript, functions are considered \"first-class citizens.\" This means that functions are treated like any other value in the language. You can:\n\n- Assign a function to a variable:  \n  Functions can be stored in variables, just like strings or numbers.\n\n- Pass a function as an argument to another function:  \n  Functions can be passed around as parameters to other functions.\n\n- Return a function from another function:  \n  Functions can be created and returned dynamically from other functions.\n\n- Store functions in data structures:  \n  Functions can be added to arrays, objects, and more.\n\n",
+    "tags": [
+      "functions"
+    ],
+    "keyFeatures": [],
+    "actionWords": [
+      " Practical Example\n\n\n// Assigning a function to a variable\nconst greet = function(name) {\n  return Hello",
+      " ${name}!;\n};\n\nconsole.log(greet(\"Alice\")); // Output: Hello",
+      " Alice!\n\n// Passing a function as an argument\nfunction processUserInput(callback) {\n  const name = \"Bob\";\n  console.log(callback(name));\n}\n\nprocessUserInput(greet); // Output: Hello",
+      " Bob!\n\n// Returning a function from another function\nfunction multiplier(factor) {\n  return function(number) {\n    return number  factor;\n  };\n}\n\nconst double = multiplier(2);\nconsole.log(double(5)); // Output: 10\n\n\n Explanation\n\n- Variable Assignment:  \n  The function greet is assigned to a variable and can be invoked using that variable.\n\n- Function as an Argument:  \n  In the processUserInput function",
+      " greet is passed as a callback",
+      " demonstrating that functions can be used as arguments.\n\n- Function as a Return Value:  \n  The multiplier function returns another function that multiplies its input by a given factor. This shows that functions can be dynamically created and returned.\n\nThese capabilities make functions extremely flexible in JavaScript",
+      " allowing you to write higher-order functions",
+      " implement functional programming patterns",
+      " and build more modular and reusable code."
+    ],
+    "codeExample": ""
   }
 ]

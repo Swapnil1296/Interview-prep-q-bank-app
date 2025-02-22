@@ -24,6 +24,7 @@ const topics = [
   { id: "postgresql", name: "PostgreSql", dataSource: "postgreSql" },
   { id: "mogo", name: "MongoDB", dataSource: "mongoDB" },
   { id: "postman", name: "Postman", dataSource: "postman" },
+  { id: "aws", name: "AWS", dataSource: "awsQbank" },
   { id: "systemDesign", name: "System Design", dataSource: "systemDesign" },
   { id: "behavioural", name: "Behavioural", dataSource: "behavioural" },
 ];

@@ -19,6 +19,7 @@ import { reactRouter } from "./utils/reactRouterDom";
 import { typescript } from "./utils/typeScript";
 import Footer from "./components/Footer"; // Import the footer
 import { behavioural } from "./utils/behavioural";
+import { awsQbank } from "./utils/awsQbank";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState("interview");
@@ -39,6 +40,7 @@ const App = () => {
     mongoDB,
     postgreSql,
     postman,
+    awsQbank,
     systemDesign,
     behavioural,
   };
