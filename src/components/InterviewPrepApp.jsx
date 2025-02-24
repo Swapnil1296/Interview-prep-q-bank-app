@@ -3,7 +3,7 @@ import { Search, ChevronDown, ChevronUp, ArrowUp, X } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import FormattedText from './helpers/FormattedText';
-
+import TopicsMenu from "./helpers/MenuComponent";
 
 const topics = [
   { id: "html", name: "HTML", dataSource: "htmlAndCSS" },
@@ -28,16 +28,6 @@ const topics = [
   { id: "systemDesign", name: "System Design", dataSource: "systemDesign" },
   { id: "behavioural", name: "Behavioural", dataSource: "behavioural" },
 ];
-
-
-
-
-
-
-
-
-
-
 
 const InterviewPrepApp = ({ dataSources }) => {
   const [activeTab, setActiveTab] = useState("react");
@@ -64,7 +54,9 @@ const InterviewPrepApp = ({ dataSources }) => {
       item?.tags?.forEach((tag) => tags.add(tag));
     });
     setAvailableTags(Array.from(tags));
-    setSelectedTag(""); // Reset selected tag when changing tabs
+    setSelectedTag("");
+    setSearchQuery("");
+    setExpandedQuestion(null);
   }, [activeTab]);
 
   const scrollToTop = () => {
@@ -87,9 +79,11 @@ const InterviewPrepApp = ({ dataSources }) => {
   };
 
   const filteredQuestions = getActiveData().filter((q) => {
-    const matchesSearch = q?.question
-      ?.toLowerCase?.()
-      ?.includes(searchQuery.toLowerCase());
+    if (!q?.question) return false;
+
+    const matchesSearch = q.question
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     const matchesTag = !selectedTag || q?.tags?.includes(selectedTag);
     return matchesSearch && matchesTag;
   });
@@ -112,7 +106,7 @@ const InterviewPrepApp = ({ dataSources }) => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white font-serif">
+    <div className="min-h-screen bg-gradient-to-br  from-gray-900 via-gray-800 to-black text-white font-serif">
       <div className="bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 text-white py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-5xl font-bold mb-4 font-sans animate-fade-in">
@@ -125,26 +119,27 @@ const InterviewPrepApp = ({ dataSources }) => {
         </div>
       </div>
 
-      <div className="bg-gray-800/80 backdrop-blur-sm shadow-lg sticky top-0 z-10 border-b border-gray-700">
-        <div className="container mx-auto px-4 custom-scrollbar">
-          <div className="flex space-x-4 overflow-x-auto custom-scrollbar">
-            {availableTopics.map((topic) => (
-              <button
-                key={topic.id}
-                onClick={() => setActiveTab(topic.id)}
-                className={`py-4 px-6 font-medium transition-all cursor-pointer duration-300 relative ${
-                  activeTab === topic.id
-                    ? "text-cyan-400"
-                    : "text-cyan-300 hover:text-cyan-400"
-                }`}
-              >
-                {topic.name}
-                {activeTab === topic.id && (
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-indigo-500" />
-                )}
-              </button>
-            ))}
-          </div>
+      <div className="bg-gray-800/80 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-gray-700">
+        <TopicsMenu
+          availableTopics={availableTopics}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 py-6 sticky top-14 z-20 bg-transparent">
+        <div className="relative">
+          <Search
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-400"
+            size={20}
+          />
+          <input
+            type="text"
+            placeholder="Search questions..."
+            className="w-full pl-10 pr-4 py-3 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 bg-gray-800/80 backdrop-blur-sm transition-all duration-300 hover:shadow-md text-cyan-100 placeholder-cyan-300/50"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
       </div>
 
@@ -169,29 +164,13 @@ const InterviewPrepApp = ({ dataSources }) => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-6 sticky top-16 z-10 bg-transparent">
-        <div className="relative">
-          <Search
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-400"
-            size={20}
-          />
-          <input
-            type="text"
-            placeholder="Search questions..."
-            className="w-full pl-10 pr-4 py-3 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 bg-gray-800/80 backdrop-blur-sm transition-all duration-300 hover:shadow-md text-cyan-100 placeholder-cyan-300/50"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 pb-16">
+      <div className="container mx-auto px-4 pb-16 ">
         <div className="space-y-6">
           {filteredQuestions.map((question, index) => (
             <div
               key={question?.id}
               ref={(el) => (questionRefs.current[question?.id] = el)}
-              className="bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 scroll-mt-32 hover:shadow-cyan-900/20 transition-all duration-300 transform hover:-translate-y-1"
+              className="bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 scroll-mt-32 hover:shadow-cyan-900/20 transition-all duration-300 transform hover:-translate-y-1 "
             >
               <div className="p-6">
                 <div className="flex flex-col space-y-4">
@@ -199,9 +178,9 @@ const InterviewPrepApp = ({ dataSources }) => {
                     className="flex justify-between cursor-pointer items-start group"
                     onClick={() => handleQuestionClick(question?.id)}
                   >
-                    <h3 className="text-lg font-medium text-cyan-300 flex-1 group-hover:text-cyan-400 transition-colors first-letter:capitalize">
+                    <h3 className="text-lg font-medium text-cyan-300 flex-1 group-hover:text-cyan-400 transition-colors first-letter:capitalize font-ibm">
                       <span className="font-semibold text-lg text-cyan-500 ">
-                        {index + 1}:
+                        <span> {index + 1}:</span>
                       </span>{" "}
                       {question?.question}
                     </h3>
@@ -240,7 +219,7 @@ const InterviewPrepApp = ({ dataSources }) => {
                         word?.trim() !== "" ? (
                           <span
                             key={index}
-                            className="bg-gradient-to-r from-cyan-900/50 to-indigo-900/50 text-cyan-300 px-4 py-1 rounded-full text-sm font-medium shadow-lg border border-cyan-800/30 line-clamp-2 first-letter:uppercase"
+                            className="bg-gradient-to-r from-cyan-900/50 to-indigo-900/50 text-cyan-300 px-4 py-1 rounded-full text-sm font-medium shadow-lg border border-cyan-800/30 line-clamp-2 first-letter:uppercase font-ibm"
                           >
                             {word.trim()}
                           </span>

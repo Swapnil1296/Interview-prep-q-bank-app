@@ -1070,7 +1070,7 @@ export const javascriptQuestionData = [
     "actionWords": [],
     "codeExample": ""
   }, {
-    "id": 72,
+    "id": "r0:072",
     "topic": "javascript",
     "question": "What is a first-class function in Javascript?",
     "answer": "In JavaScript, functions are considered \"first-class citizens.\" This means that functions are treated like any other value in the language. You can:\n\n- Assign a function to a variable:  \n  Functions can be stored in variables, just like strings or numbers.\n\n- Pass a function as an argument to another function:  \n  Functions can be passed around as parameters to other functions.\n\n- Return a function from another function:  \n  Functions can be created and returned dynamically from other functions.\n\n- Store functions in data structures:  \n  Functions can be added to arrays, objects, and more.\n\n",
