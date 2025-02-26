@@ -42,7 +42,7 @@ const TopicsMenu = ({ availableTopics, activeTab, setActiveTab }) => {
         </button>
 
         {isOpen && (
-          <div className="absolute top-full left-0 mt-2 w-56 bg-gray-800 rounded-lg shadow-xl border border-gray-700 py-2 z-50">
+          <div className="absolute top-full left-10 mt-2  w-56 bg-gray-800 rounded-lg shadow-2xl border border-gray-700 py-2 z-50">
             <div className="max-h-[40vh] overflow-y-auto custom-scrollbar">
               {availableTopics.map((topic) => (
                 <button

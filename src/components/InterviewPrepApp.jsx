@@ -127,16 +127,16 @@ const InterviewPrepApp = ({ dataSources }) => {
         />
       </div>
 
-      <div className="container mx-auto px-4 py-6 sticky top-14 z-20 bg-transparent">
+      <div className="container mx-auto text-right px-4 py-6 sticky top-14 z-20 bg-transparent">
         <div className="relative">
-          <Search
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-400"
+          {/* <Search
+            className="absolute  left-3 top-1/2  transform -translate-y-1/2 text-cyan-400"
             size={20}
-          />
+          /> */}
           <input
             type="text"
             placeholder="Search questions..."
-            className="w-full pl-10 pr-4 py-3 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 bg-gray-800/80 backdrop-blur-sm transition-all duration-300 hover:shadow-md text-cyan-100 placeholder-cyan-300/50"
+            className="w-full md:w-3/5 lg:w-3/5  pl-10 pr-4 py-3 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 bg-gray-800/80 backdrop-blur-sm transition-all duration-300 hover:shadow-md text-cyan-100 placeholder-cyan-300/50"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -178,7 +178,7 @@ const InterviewPrepApp = ({ dataSources }) => {
                     className="flex justify-between cursor-pointer items-start group"
                     onClick={() => handleQuestionClick(question?.id)}
                   >
-                    <h3 className="text-lg font-medium text-cyan-300 flex-1 group-hover:text-cyan-400 transition-colors first-letter:capitalize font-ibm">
+                    <h3 className="text-lg font-medium text-cyan-300 flex-1 group-hover:text-cyan-400 transition-colors first-letter:capitalize">
                       <span className="font-semibold text-lg text-cyan-500 ">
                         <span> {index + 1}:</span>
                       </span>{" "}
@@ -219,7 +219,7 @@ const InterviewPrepApp = ({ dataSources }) => {
                         word?.trim() !== "" ? (
                           <span
                             key={index}
-                            className="bg-gradient-to-r from-cyan-900/50 to-indigo-900/50 text-cyan-300 px-4 py-1 rounded-full text-sm font-medium shadow-lg border border-cyan-800/30 line-clamp-2 first-letter:uppercase font-ibm"
+                            className="bg-gradient-to-r from-cyan-900/50 to-indigo-900/50 text-cyan-300 px-4 py-1 rounded-full text-sm font-medium shadow-lg border border-cyan-800/30 line-clamp-2 first-letter:uppercase"
                           >
                             {word.trim()}
                           </span>
@@ -249,6 +249,13 @@ const InterviewPrepApp = ({ dataSources }) => {
                           language="javascript"
                           style={vscDarkPlus}
                           className="rounded-xl overflow-x-auto shadow-lg border border-gray-700 p-6"
+                          wrapLines
+                          lineProps={{
+                            style: {
+                              wordBreak: "break-all",
+                              whiteSpace: "pre-wrap",
+                            },
+                          }}
                         >
                           {question.codeExample}
                         </SyntaxHighlighter>

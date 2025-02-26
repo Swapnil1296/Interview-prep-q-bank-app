@@ -6,7 +6,10 @@ const Footer = () => {
     <footer className="bg-gray-900 text-gray-400 py-6 text-center mt-auto">
       <div className="container mx-auto flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
         {/* Reserved Rights */}
-        <p className="text-sm">© 2025 Your Company. All rights reserved.</p>
+        <p className="text-sm">
+          © 2025 Your Company. All rights reserved @Swapnil
+        </p>
+
         {/* Phone Number */}
         <div className="inline-flex items-center">
           <Phone className="w-5 h-5 mr-2" />

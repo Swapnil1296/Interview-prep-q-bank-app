@@ -13,9 +13,9 @@
 
 /* Other default styles */
 .custom-scrollbar::-webkit-scrollbar {
-    height: 6px;
+    height: 2px;
     /* Horizontal scrollbar height */
-    width: 6px;
+    width: 2px;
     /* If vertical scrollbar is also needed */
 }
 

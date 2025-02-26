@@ -3,30 +3,30 @@ export const postgreSql = [
         "id": ":r1:01",
         "topic": "postgresql",
         "question": " What is PostgreSQL?\r",
-        "answer": " PostgreSQL is an advanced, open-source relational database management system (RDBMS) known for its stability, extensibility, and adherence to SQL standards. It supports complex queries, transactions, and data integrity while allowing you to define custom data types, operators, and functions. PostgreSQL’s architecture is built around the concept of Multi-Version Concurrency Control (MVCC), which means that it provides high levels of concurrency and performance without heavy locking.\n Additional Details:\n-Extensibility: Users can create custom functions in various languages (PL/pgSQL, PL/Python, etc.).\n-ACID Compliance: Ensures that transactions are processed reliably.\n-Community and Ecosystem: A robust ecosystem with many third-party tools, extensions (like PostGIS for geospatial data), and active community support.\n",
-        "tags": [],
+        "answer": " -PostgreSQL is an advanced, <mark>open-source relational database management system (RDBMS)</mark> known for its stability, extensibility, and adherence to SQL standards. \n-It supports complex queries, transactions, and data integrity while allowing you to define custom data types, operators, and functions. \n-PostgreSQL’s architecture is built around the concept of Multi-Version Concurrency Control (MVCC), which <mark>means that it provides high levels of concurrency and performance without heavy locking</mark>.\n Additional Details:\n-Extensibility: Users can create custom functions in various languages (PL/pgSQL, PL/Python, etc.).\n-ACID Compliance: Ensures that transactions are processed reliably.\n-Community and Ecosystem: A robust ecosystem with many third-party tools, extensions (like PostGIS for geospatial data), and active community support.\n",
+        "tags": ["definition"],
         "keyFeatures": [],
-        "actionWords": [],
+        "actionWords": ["relational database management system", "Multi-Version Concurrency Control (MVCC)"],
         "codeExample": ""
     },
     {
         "id": ":r1:11",
         "topic": "postgresql",
         "question": "How do you connect to PostgreSQL using psql?\r",
-        "answer": " The psql command-line tool is the most common method to interact with a PostgreSQL database.\n \n\nDetailed Explanation:\n-Host (-h): Specifies the server address. Use localhost for local connections or an IP/hostname for remote servers.\n-User (-U): Specifies the PostgreSQL user to log in as. The default superuser is usually named postgres.\n-Database (-d): Indicates the database you wish to connect to.\n-Interactive Shell: Once connected, you can execute SQL commands, use meta-commands (starting with a backslash), and navigate your database environment.\n",
+        "answer": " The psql command-line tool is the most common method to interact with a PostgreSQL database.",
         "tags": [],
         "keyFeatures": [],
         "actionWords": [],
-        "codeExample": "Example:\r\npsql -h localhost -U postgres -d mydatabase"
+        "codeExample": "Example:\r\npsql -h localhost -U postgres -d mydatabase \n \n\nDetailed Explanation:\n-Host (-h): Specifies the server address. Use localhost for local connections or an IP/hostname for remote servers.\n-User (-U): Specifies the PostgreSQL user to log in as. The default superuser is usually named postgres.\n-Database (-d): Indicates the database you wish to connect to.\n-Interactive Shell: Once connected, you can execute SQL commands, use meta-commands (starting with a backslash), and navigate your database environment.\n "
     },
     {
         "id": ":r1:21",
         "topic": "postgresql",
         "question": "What are the common data types in PostgreSQL?\r",
-        "answer": " PostgreSQL supports a broad range of data types to cater to various use cases.\n Examples and Explanation:\n1.Numeric Types:\n-INTEGER, BIGINT, SMALLINT: Used for whole numbers.\n-NUMERIC, DECIMAL: Ideal for exact numeric values with a defined precision (useful in financial calculations).\n2.Character Types:\n-CHAR, VARCHAR: Fixed and variable length strings.\n-TEXT: For large, variable-length strings without a defined limit.\n3.Date/Time Types:\n-DATE, TIME, TIMESTAMP: For storing dates, times, and combined date/time values.\n-INTERVAL: For representing durations.\n4.Boolean:\n-BOOLEAN: Stores TRUE, FALSE, or NULL.\n5.Advanced Types:\n-ARRAY: Supports multi-dimensional arrays.\n-JSON and JSONB: For storing JSON data (with JSONB being binary and optimized for indexing).\n-UUID: For universally unique identifiers.\n ",
+        "answer": " PostgreSQL supports a broad range of data types to cater to various use cases.\n Examples and Explanation:\n1.Numeric Types:\n- <i>INTEGER, BIGINT, SMALLINT</i>: Used for whole numbers.\n- <i>NUMERIC, DECIMAL</i>: Ideal for exact numeric values with a defined precision (useful in financial calculations).\n2.Character Types:\n- <i>CHAR, VARCHAR</i>: Fixed and variable length strings.\n- <i>TEXT</i>: For large, variable-length strings without a defined limit.\n3.Date/Time Types:\n- <i>DATE, TIME, TIMESTAMP</i>: For storing dates, times, and combined date/time values.\n- <i>INTERVAL</i>: For representing durations.\n4.Boolean:\n- <i>BOOLEAN</i>: Stores TRUE, FALSE, or NULL.\n5.Advanced Types:\n- <i>ARRAY</i>: Supports multi-dimensional arrays.\n- <i>JSON and JSONB</i>: For storing JSON data (with JSONB being binary and optimized for indexing).\n- <i>UUID</i>: For universally unique identifiers.\n ",
         "tags": [],
         "keyFeatures": [],
-        "actionWords": [],
+        "actionWords": ["INTEGER, BIGINT, SMALLINT,NUMERIC, DECIMAL", "CHAR, VARCHAR,TEXT", "DATE, TIME, TIMESTAMP,INTERVAL", "BOOLEAN", "ARRAY", "JSON and JSONB", "UUID"],
         "codeExample": "Table Example:\r\nCREATE TABLE employees (\r\n    id SERIAL PRIMARY KEY,\r\n    name VARCHAR(100) NOT NULL,\r\n    salary NUMERIC(10,2),\r\n    join_date DATE,\r\n    skills TEXT[],\r\n    profile JSONB,\r\n    is_active BOOLEAN DEFAULT true\r\n);\r\n\r\nThis example illustrates the use of multiple data types in one table.\r"
     },
     {
@@ -34,9 +34,9 @@ export const postgreSql = [
         "topic": "postgresql",
         "question": "How do you create a database in PostgreSQL?",
         "answer": " You can create a database using SQL commands directly within psql or via the command line.\n \n\n",
-        "tags": [],
+        "tags": ["db-creation"],
         "keyFeatures": [],
-        "actionWords": [],
+        "actionWords": ["CREATE DATABASE <dbname>"],
         "codeExample": "Examples:\n SQL Command:\nCREATE DATABASE company_db;\n\nCommand Line:\ncreatedb company_db\n\nDetailed Explanation:\nOwnership and Encoding: You can specify an owner and encoding for the database:\n CREATE DATABASE company_db\nWITH OWNER = myuser\n     ENCODING = 'UTF8'\n     LC_COLLATE = 'en_US.UTF-8'\n     LC_CTYPE = 'en_US.UTF-8';\n\nUsage: Creating separate databases helps isolate data and manage permissions effectively."
     },
     {
@@ -53,20 +53,20 @@ export const postgreSql = [
         "id": ":r1:51",
         "topic": "postgresql",
         "question": "What are constraints in PostgreSQL?",
-        "answer": "Constraints are rules applied to table columns to enforce data integrity and consistency.\n \n",
-        "tags": [],
+        "answer": "-In PostgreSQL, constraints are <mark>rules or conditions applied to a table's columns to enforce data integrity and consistency</mark>.\n- They ensure that the data entered into the database adheres to specific requirements, preventing invalid or inconsistent data from being stored.\n- Constraints are defined when creating or altering a table and are enforced automatically by the database system.\n \n",
+        "tags": ["constraints"],
         "keyFeatures": [],
-        "actionWords": [],
-        "codeExample": "Examples and Details:\nPRIMARY KEY: Uniquely identifies each row.\n customer_id SERIAL PRIMARY KEY\n\n\nFOREIGN KEY: Ensures that a value in one table corresponds to a value in another.\n customer_id INTEGER REFERENCES customers(customer_id)\n\n\nUNIQUE: Prevents duplicate values.\n email VARCHAR(100) UNIQUE\n\n\nCHECK: Enforces domain integrity by limiting the values that can be placed in a column.\n CHECK (salary > 0)\n\n\nNOT NULL: Ensures that a column cannot have a NULL value.\n name VARCHAR(100) NOT NULL\n\n\nConstraints help prevent invalid data from being inserted, ensuring the reliability of your database."
+        "actionWords": ["conditions applied to a table's columns ", "UNIQUE,NOT NULL,CHECK,PRIMARY KEY,FOREIGN KEY"],
+        "codeExample": "Examples and Details:\n\n➤PRIMARY KEY: UA combination of NOT NULL and UNIQUE, used to uniquely identify each row in a table. Typically applied to an ID column.\n\n customer_id SERIAL PRIMARY KEY\n\n➤FOREIGN KEY:Ensures that values in a column (or set of columns) match values in another table’s primary key or unique key, enforcing referential integrity between tables.\n\n customer_id INTEGER REFERENCES customers(customer_id)\n\n➤UNIQUE: Guarantees that all values in a column (or a combination of columns) are distinct across all rows in the table.\n\n email VARCHAR(100) UNIQUE\n\n➤CHECK: Enforces domain integrity by limiting the values that can be placed in a column.\n\n CHECK (salary > 0)\n\n➤NOT NULL: Ensures that a column cannot contain NULL values. Every row must have a valid value for that column.\n\n name VARCHAR(100) NOT NULL\n\nConstraints help prevent invalid data from being inserted, ensuring the reliability of your database."
     },
     {
         "id": ":r1:61",
         "topic": "postgresql",
         "question": "What is a primary key in PostgreSQL?\r",
-        "answer": " A primary key is a special column (or a combination of columns) that uniquely identifies each row in a table. It cannot contain NULL values.\n",
-        "tags": [],
+        "answer": "-In PostgreSQL, a primary key is <mark> a column or a set of columns in a table that uniquely identifies each row</mark>. \n-It’s <mark>like a fingerprint</mark> for every record—ensuring no two rows can have the same value in that column (or combination of columns). \n-This uniqueness is enforced through a constraint, and it also automatically prevents null values since a <mark>primary key must always have a valid entry</mark>.\n-Primary keys also play a big role in performance—they <mark>automatically create a unique index, speeding up lookups and joins</mark>. \n-Plus, they’re often used as a reference point for foreign keys in related tables, keeping your database relational and organized",
+        "tags": ["primary key"],
         "keyFeatures": [],
-        "actionWords": [],
+        "actionWords": ["column or a set of columns in a table that uniquely identifies each row"],
         "codeExample": " Example:\nCREATE TABLE customers (\n    customer_id SERIAL PRIMARY KEY,\n    customer_name VARCHAR(100) NOT NULL\n);\n\nExtended Details:\nUniqueness: PostgreSQL automatically creates a unique index on primary key columns to speed up searches.\nBest Practices: Always designate a primary key to help enforce data integrity and optimize performance."
     },
     {
@@ -74,7 +74,7 @@ export const postgreSql = [
         "topic": "postgresql",
         "question": "How do you insert data into PostgreSQL?\r",
         "answer": " Data is added using the INSERT statement. You can insert single or multiple rows, and even return values from the inserted row(s).\r\n \r\nBatch Inserts: You can insert multiple rows in one command for efficiency.\r\n",
-        "tags": [],
+        "tags": ["Insert"],
         "keyFeatures": [],
         "actionWords": [],
         "codeExample": "Example:\r\nINSERT INTO employees (name, salary, join_date, is_active)\r\nVALUES ('John Doe', 75000.00, '2023-03-01', true);\r\n\r\nMore Details:\r\nReturning Clause: Retrieve auto-generated values (like serial IDs).\r\n INSERT INTO employees (name, salary)\r\nVALUES ('Jane Doe', 82000.00)\r\nRETURNING id;\r\n\r"
@@ -84,7 +84,7 @@ export const postgreSql = [
         "topic": "postgresql",
         "question": "How do you update data in PostgreSQL?\r",
         "answer": "The UPDATE statement is used to modify existing data. It’s crucial to use a WHERE clause to prevent updating every row in the table.\n\n\n\nTransaction Safety: It’s often used within transactions to ensure atomicity.\n",
-        "tags": [],
+        "tags": ["update"],
         "keyFeatures": [],
         "actionWords": [],
         "codeExample": " Example:\r\nUPDATE employees\r\nSET salary = 80000.00\r\nWHERE name = 'John Doe';\r\n\r\nDetailed Explanation:\r\nConditional Updates: Use WHERE to target specific rows.\r\nReturning Clause: Optionally, return the updated rows.\r\n UPDATE employees\r\nSET salary = 80000.00\r\nWHERE name = 'John Doe'\r\nRETURNING ;"
@@ -94,7 +94,7 @@ export const postgreSql = [
         "topic": "postgresql",
         "question": "How do you delete data in PostgreSQL?\r",
         "answer": " Data is removed with the DELETE statement, again using a WHERE clause to specify which records to delete.\n \n\nAdditional Details:\n-Cascading Deletes: If foreign keys are set with ON DELETE CASCADE, deleting a parent record can automatically delete related child records.\n-Transaction Use: Often, DELETE commands are wrapped in transactions to allow rollback if necessary.\n",
-        "tags": [],
+        "tags": ['delete'],
         "keyFeatures": [],
         "actionWords": [],
         "codeExample": "Example:\r\nDELETE FROM employees\r\nWHERE name = 'John Doe';"
@@ -113,31 +113,31 @@ export const postgreSql = [
         "id": ":r1:111",
         "topic": "postgresql",
         "question": "What are joins in PostgreSQL?",
-        "answer": " Joins combine rows from two or more tables based on related columns.\n \n\n\n\n",
-        "tags": [],
+        "answer": "- In PostgreSQL, joins are <mark>a way to combine rows from two or more tables based on a related column</mark>, letting you pull together data that’s spread across your database.\n- Think of it as matching up puzzle pieces—each table has its own info, but a join connects them where they overlap\n- Joins rely on a condition (usually with ON) to match rows, often using primary keys and foreign keys.\n- They’re super powerful for digging into relationships—like finding out which products customers bought or which employees handled specific tasks. The trick is picking the right join type to get exactly the data you want without missing anything or drowning in extras",
+        "tags": ["joins"],
         "keyFeatures": [],
-        "actionWords": [],
-        "codeExample": "Example Types:\n1.LEFT JOIN: Returns all rows from the left table and matched rows from the right table.\n SELECT e.name, d.dept_name\nFROM employees e\nLEFT JOIN departments d ON e.dept_id = d.dept_id;\n\n\n2.RIGHT JOIN: The opposite of LEFT JOIN.\n3.FULL OUTER JOIN: Returns rows when there is a match in one of the tables. Additional Details:\n-Join Conditions: Can involve multiple columns or complex expressions.\n-Self-Joins: Joining a table to itself to compare rows within the same table.\n4.INNER JOIN: Returns only rows with matching values in both tables.\n SELECT e.name, d.dept_name\nFROM employees e\nINNER JOIN departments d ON e.dept_id = d.dept_id;"
+        "actionWords": ["a way to combine rows from two or more tables based on a related column"],
+        "codeExample": "Example Types:\n1.LEFT JOIN: Keeps all rows from the left table, even if there’s no match in the right table. Unmatched rows get NULL values for the right table’s columns.\n SELECT e.name, d.dept_name\nFROM employees e\nLEFT JOIN departments d ON e.dept_id = d.dept_id;\n\n\n2.RIGHT JOIN: The opposite—keeps all rows from the right table, filling in NULLs for unmatched rows from the left table\n3.FULL OUTER JOIN: Combines both tables completely, keeping all rows from both sides. If there’s no match, you get NULLs on the side that’s missing a pair. \n4.SELF JOIN: Joining a table to itself to compare rows within the same table.\n5.INNER JOIN: Returns only rows with matching values in both tables.\n SELECT e.name, d.dept_name\nFROM employees e\nINNER JOIN departments d ON e.dept_id = d.dept_id;"
     },
     {
         "id": ":r1:121",
         "topic": "postgresql",
         "question": "How do you create indexes in PostgreSQL?",
-        "answer": " Indexes are used to speed up data retrieval. PostgreSQL supports various index types for different use cases.\n \n\n",
-        "tags": [],
+        "answer": "- In PostgreSQL, you create indexes to <mark>speed up data retrieval—like</mark> adding a table of contents to a book so you can jump straight to the good stuff.\n- An index is a separate structure that tracks the values in one or more columns, making queries (especially WHERE, JOIN, and ORDER BY) faster by avoiding full table scans.\n \n\n",
+        "tags": ["index"],
         "keyFeatures": [],
-        "actionWords": [],
-        "codeExample": "Example:\r\nCREATE INDEX idx_employee_name ON employees(name);"
+        "actionWords": ["speed up data retrieval—like"],
+        "codeExample": "Example:\r\nCREATE INDEX idx_employee_name ON employees(name); \r\nThis speeds up searches like SELECT * FROM employee_name WHERE name = 'Alice'."
     },
     {
         "id": ":r1:131",
         "topic": "postgresql",
         "question": "What are advanced indexing types in PostgreSQL?\r",
-        "answer": " PostgreSQL supports advanced indexing options for specific data types and query patterns.\n \n1.GiST (Generalized Search Tree):\n-Often used for geometric data types and range searches.\n2.BRIN (Block Range INdex):\n-Efficient for very large tables where the indexed values are naturally sorted.\n-Lower storage overhead compared to B-tree indexes.\n\n",
-        "tags": [],
+        "answer": "- PostgreSQL offers a range of advanced indexing types beyond the default B-tree, each designed for specific data types or query patterns.\n- These let you optimize performance for complex scenarios—like searching JSON, arrays, full-text documents, or even spatial data. ",
+        "tags": ["index"],
         "keyFeatures": [],
         "actionWords": [],
-        "codeExample": "Examples and Details:\nGIN (Generalized Inverted Index):\nIdeal for indexing array values, full-text search, and JSONB data.\nCREATE INDEX idx_document_gin ON articles USING gin(document);\n\nMore Details:\nUnique Indexes: Enforce uniqueness.\n CREATE UNIQUE INDEX idx_unique_email ON employees(email);\n\n\nExpression Indexes: Create indexes on expressions.\n CREATE INDEX idx_lower_name ON employees(LOWER(name));\n\n\nPartial Indexes: Index only a subset of rows.\n CREATE INDEX idx_active_employees ON employees(name) WHERE is_active;\n"
+        "codeExample": "Examples and Details:\n1.GIN (Generalized Inverted Index):\nWhat it’s for: Multi-value data like arrays, JSONB, or full-text search.\nHow it works:Instead of indexing each row’s value as a whole, GIN breaks it down into individual elements (e.g., array items or words) and maps them back to the rows containing them. It’s inverted—like a book index pointing to pages.\n\nCREATE INDEX idx_document_gin ON articles USING gin(document);\n\n 2. GiST (Generalized Search Tree):\nWhat it’s for: Spatial data, ranges, or anything needing \"overlap\" or \"nearness\" checks.How it works: GiST is a flexible framework that supports lossy indexing—meaning it might include some false positives, which are filtered later. It’s great for geometric types or custom operators.\n\nCREATE INDEX idx_locations ON locations USING GIST (geometry);\n\n3. BRIN (Block Range INdex):\nWhat it’s for: Large, naturally ordered tables—like time-series or sequential IDs.\nHow it works: BRIN doesn’t index every value. Instead, it summarizes ranges of table blocks (e.g., min/max values per 1MB chunk). It’s tiny and fast to maintain but less precise.\n\nCREATE INDEX idx_logs_timestamp ON logs USING BRIN (timestamp);\n\n4. Hash Index:\nWhat it’s for: Simple equality checks (=).\nHow it works: Creates a hash of the indexed value and maps it to rows. It’s compact but only supports exact matches—no ranges or sorting.\n\nCREATE INDEX idx_users_id ON users USING HASH (user_id);\n"
     },
     {
         "id": ":r1:141",
