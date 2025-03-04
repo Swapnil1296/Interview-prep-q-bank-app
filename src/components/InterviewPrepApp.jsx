@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import FormattedText from './helpers/FormattedText';
 import TopicsMenu from "./helpers/MenuComponent";
+import Header from "./Header";
 
 const topics = [
   { id: "html", name: "HTML", dataSource: "htmlAndCSS" },
@@ -27,6 +28,8 @@ const topics = [
   { id: "aws", name: "AWS", dataSource: "awsQbank" },
   { id: "systemDesign", name: "System Design", dataSource: "systemDesign" },
   { id: "behavioural", name: "Behavioural", dataSource: "behavioural" },
+  { id: "resume", name: "Resume", dataSource: "resumeSpecific" },
+
 ];
 
 const InterviewPrepApp = ({ dataSources }) => {
@@ -37,10 +40,15 @@ const InterviewPrepApp = ({ dataSources }) => {
   const [selectedTag, setSelectedTag] = useState("");
   const [availableTags, setAvailableTags] = useState([]);
   const questionRefs = useRef({});
+  const [showSearchBar, setShowSearchBar] = useState(true);
+  const toggleSearchBar = () => {
+    setShowSearchBar(!showSearchBar);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
+
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -64,6 +72,7 @@ const InterviewPrepApp = ({ dataSources }) => {
       top: 0,
       behavior: "smooth",
     });
+    setShowSearchBar(true)
   };
 
   const getActiveData = () => {
@@ -107,17 +116,7 @@ const InterviewPrepApp = ({ dataSources }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br  from-gray-900 via-gray-800 to-black text-white font-serif">
-      <div className="bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-700 text-white py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-5xl font-bold mb-4 font-sans animate-fade-in">
-            Interview Preparation Guide
-          </h1>
-          <p className="text-xl font-light tracking-wide">
-            Master your technical interviews with comprehensive answers and
-            examples
-          </p>
-        </div>
-      </div>
+      <Header />
 
       <div className="bg-gray-800/80 backdrop-blur-sm shadow-lg sticky top-0 z-30 border-b border-gray-700">
         <TopicsMenu
@@ -127,18 +126,64 @@ const InterviewPrepApp = ({ dataSources }) => {
         />
       </div>
 
-      <div className="container mx-auto text-right px-4 py-6 sticky top-14 z-20 bg-transparent">
-        <div className="relative">
-          {/* <Search
-            className="absolute  left-3 top-1/2  transform -translate-y-1/2 text-cyan-400"
-            size={20}
-          /> */}
+      <div className="container mx-auto px-4 py-6 sticky top-14 z-20 bg-transparent flex items-center justify-end">
+        <button
+          onClick={toggleSearchBar}
+          className="w-12 h-12 mr-4 transition-transform duration-300 hover:scale-110 focus:outline-none"
+          aria-label={showSearchBar ? "Hide search" : "Show search"}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" className="w-full h-full">
+            {/* SVG content from artifact */}
+            <circle cx="30" cy="30" r="28" fill="none" stroke="url(#outerGlow)" strokeWidth="1" />
+            <circle cx="30" cy="30" r="24" fill="url(#buttonGradient)" />
+            <circle cx="30" cy="30" r="20" fill="none" stroke="#80e5ff" strokeWidth="1.5" strokeDasharray="1,3" />
+            <circle cx="30" cy="30" r="16" fill="url(#innerGradient)" />
+
+            {/* Show appropriate icon based on state */}
+            <g style={{ opacity: showSearchBar ? 0 : 1 }}>
+              <circle cx="25" cy="25" r="8" fill="none" stroke="#ffffff" strokeWidth="2" />
+              <line x1="31" y1="31" x2="38" y2="38" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" />
+            </g>
+
+            <g style={{ opacity: showSearchBar ? 1 : 0 }}>
+              <path d="M20,30 C20,30 25,20 30,20 C35,20 40,30 40,30 C40,30 35,40 30,40 C25,40 20,30 20,30 Z" fill="none" stroke="#ffffff" strokeWidth="2" />
+              <circle cx="30" cy="30" r="4" fill="#ffffff" />
+              <line x1="18" y1="42" x2="42" y2="18" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" />
+            </g>
+
+            <circle cx="30" cy="30" r="23" fill="none" stroke="#00ffff" strokeWidth="0.5" opacity="0.7">
+              <animate attributeName="r" values="23;26;23" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite" />
+            </circle>
+
+            <defs>
+              <linearGradient id="buttonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#001e33" />
+                <stop offset="100%" stopColor="#003366" />
+              </linearGradient>
+
+              <linearGradient id="innerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#004080" />
+                <stop offset="100%" stopColor="#0066cc" />
+              </linearGradient>
+
+              <radialGradient id="outerGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="80%" stopColor="#00ccff" stopOpacity="0" />
+                <stop offset="100%" stopColor="#00ffff" stopOpacity="0.7" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </button>
+
+        {/* Animated search bar */}
+        <div className={`relative transition-all duration-300 ease-in-out ${showSearchBar ? 'w-full md:w-3/5 lg:w-3/5 opacity-100' : 'w-0 opacity-0'}`}>
           <input
             type="text"
             placeholder="Search questions..."
-            className="w-full md:w-3/5 lg:w-3/5  pl-10 pr-4 py-3 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 bg-gray-800/80 backdrop-blur-sm transition-all duration-300 hover:shadow-md text-cyan-100 placeholder-cyan-300/50"
+            className="w-full pl-10 pr-4 py-3 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-400 bg-gray-800/80 backdrop-blur-sm transition-all duration-300 hover:shadow-md text-cyan-100 placeholder-cyan-300/50"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            disabled={!showSearchBar}
           />
         </div>
       </div>
@@ -236,7 +281,10 @@ const InterviewPrepApp = ({ dataSources }) => {
                         Answer
                       </h4>
                       <div className="leading-relaxed">
-                        <FormattedText text={question?.answer} />
+                        <FormattedText
+                          text={question?.answer}
+                          contentType={question?.contentType}
+                        />
                       </div>
                     </div>
 
@@ -248,12 +296,19 @@ const InterviewPrepApp = ({ dataSources }) => {
                         <SyntaxHighlighter
                           language="javascript"
                           style={vscDarkPlus}
-                          className="rounded-xl overflow-x-auto shadow-lg border border-gray-700 p-6"
-                          wrapLines
+                          className="rounded-xl shadow-lg border border-gray-700 p-6"
+                          wrapLongLines
+                          customStyle={{
+                            // overflowX: "auto",
+                            whiteSpace: "pre-wrap",
+                            overflowWrap: "break-word",
+                            wordBreak: "normal",
+                          }}
                           lineProps={{
                             style: {
-                              wordBreak: "break-all",
                               whiteSpace: "pre-wrap",
+                              overflowWrap: "break-word",
+                              wordBreak: "normal",
                             },
                           }}
                         >
