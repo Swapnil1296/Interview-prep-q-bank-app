@@ -327,7 +327,7 @@ const InterviewPrepApp = ({ dataSources }) => {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 transform hover:-translate-y-1 z-50 group"
+          className="fixed bottom-8 right-14 lg:right-8 md:right-8 p-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 transform hover:-translate-y-1 z-50 group"
           aria-label="Scroll to top"
         >
           <ArrowUp className="text-white w-6 h-6 group-hover:animate-bounce" />

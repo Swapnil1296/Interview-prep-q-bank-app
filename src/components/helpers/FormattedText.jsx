@@ -347,20 +347,22 @@ const FormattedText = ({ text, contentType }) => {
 
     const trimmedLine = line?.trim() || "";
     const formattedLine = formatText(trimmedLine);
+
+    // Pattern for numbered subtopics
     const subtopicPattern = /^(\d+\.)(\s*)([^:]+)(:)(.*)/;
     const subtopicMatch = trimmedLine.match(subtopicPattern);
+
+    // Pattern for bullet point subtopics
+    const bulletSubtopicPattern = /^(-\s*)([a-zA-Z\s]+)(:)(.*)/;
+    const bulletSubtopicMatch = trimmedLine.match(bulletSubtopicPattern);
+
     const isHeading = trimmedLine.endsWith(":");
     const isQuestion = trimmedLine.endsWith("?");
-    if (subtopicMatch) {
-      // Format the line with parts:
-      // subtopicMatch[1] = "1. "
-      // subtopicMatch[2] = "Classes"
-      // subtopicMatch[3] = " :"
-      // subtopicMatch[4] = " Allow grouping. Many elements..."
 
+    // Handle bullet point subtopics
+    if (bulletSubtopicMatch) {
       const formattedLine =
-        `${formatText(subtopicMatch[1] + subtopicMatch[2])}<span class="italic text-green-400">${subtopicMatch[3]}</span>${formatText(subtopicMatch[4] + subtopicMatch[5])}`;
-
+        `${formatText(bulletSubtopicMatch[1])}<span class="italic  text-emerald-500">${bulletSubtopicMatch[2]}</span>${formatText(bulletSubtopicMatch[3] + bulletSubtopicMatch[4])}`;
 
       return (
         <p
@@ -370,11 +372,27 @@ const FormattedText = ({ text, contentType }) => {
         />
       );
     }
+
+    // Handle numbered subtopics
+    if (subtopicMatch) {
+      const formattedLine =
+        `${formatText(subtopicMatch[1] + subtopicMatch[2])}<span class="italic text-green-400">${subtopicMatch[3]}</span>${formatText(subtopicMatch[4] + subtopicMatch[5])}`;
+
+      return (
+        <p
+          key={key}
+          className="mb-3 text-cyan-200"
+          dangerouslySetInnerHTML={{ __html: formattedLine.trim() }}
+        />
+      );
+    }
+
     return (
       <p
         key={key}
-        className={`mb-3 ${isHeading ? "font-medium mt-4 text-cyan-500"
-          : isQuestion ? "font-medium mt-4 text-amber-500" : "text-cyan-200"
+        className={`mb-3 ${isHeading ? "font-medium mt-4 text-cyan-500" :
+          isQuestion ? "font-medium mt-4 text-amber-500" :
+            "text-cyan-200"
           }`}
         dangerouslySetInnerHTML={{ __html: formattedLine.trim() }}
       />
@@ -419,7 +437,7 @@ const FormattedText = ({ text, contentType }) => {
         return (
           <SyntaxHighlighter
             key={index}
-            language={language}
+            language={'javascript'}
             style={vscDarkPlus}
             className="rounded-xl shadow-lg border border-gray-700 p-6"
             wrapLongLines
