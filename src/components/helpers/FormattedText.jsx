@@ -390,9 +390,9 @@ const FormattedText = ({ text, contentType }) => {
     return (
       <p
         key={key}
-        className={`mb-3 ${isHeading ? "font-medium mt-4 text-cyan-500" :
+        className={`mb-3 ${isHeading ? "font-semibold font-mono    mt-4 text-cyan-600" :
           isQuestion ? "font-medium mt-4 text-amber-500" :
-            "text-cyan-200"
+            "text-cyan-300 font-sans"
           }`}
         dangerouslySetInnerHTML={{ __html: formattedLine.trim() }}
       />
