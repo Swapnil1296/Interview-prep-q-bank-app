@@ -1079,15 +1079,7 @@ export const javascriptQuestionData = [
     ],
     "keyFeatures": [],
     "actionWords": [
-      " Practical Example\n\n\n// Assigning a function to a variable\nconst greet = function(name) {\n  return Hello",
-      " ${name}!;\n};\n\nconsole.log(greet(\"Alice\")); // Output: Hello",
-      " Alice!\n\n// Passing a function as an argument\nfunction processUserInput(callback) {\n  const name = \"Bob\";\n  console.log(callback(name));\n}\n\nprocessUserInput(greet); // Output: Hello",
-      " Bob!\n\n// Returning a function from another function\nfunction multiplier(factor) {\n  return function(number) {\n    return number  factor;\n  };\n}\n\nconst double = multiplier(2);\nconsole.log(double(5)); // Output: 10\n\n\n Explanation\n\n- Variable Assignment:  \n  The function greet is assigned to a variable and can be invoked using that variable.\n\n- Function as an Argument:  \n  In the processUserInput function",
-      " greet is passed as a callback",
-      " demonstrating that functions can be used as arguments.\n\n- Function as a Return Value:  \n  The multiplier function returns another function that multiplies its input by a given factor. This shows that functions can be dynamically created and returned.\n\nThese capabilities make functions extremely flexible in JavaScript",
-      " allowing you to write higher-order functions",
-      " implement functional programming patterns",
-      " and build more modular and reusable code."
+
     ],
     "codeExample": ""
   }

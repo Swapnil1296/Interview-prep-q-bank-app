@@ -22,6 +22,8 @@ import Footer from "./components/Footer"; // Import the footer
 import { behavioural } from "./utils/behavioural";
 import { awsQbank } from "./utils/awsQbank";
 import { resumeSpecific } from './utils/resumeSpecific';
+import { dataStructures } from './utils/data-structure';
+import MainChart from './components/helpers/TimeComplexityChart';
 
 
 const App = () => {
@@ -46,7 +48,8 @@ const App = () => {
     awsQbank,
     systemDesign,
     behavioural,
-    resumeSpecific
+    resumeSpecific,
+    dataStructures
   };
 
   const handleNavClick = (component) => {
@@ -75,6 +78,15 @@ const App = () => {
                 }`}
               >
                 Interview Questions
+              </button>
+              <button
+                onClick={() => handleNavClick("timeComplexity")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:cursor-pointer ${activeComponent === "timeComplexity"
+                  ? "bg-blue-600 text-white"
+                  : "bg-cyan-500 text-gray-700 hover:bg-blue-50"
+                  }`}
+              >
+                Time Complexity
               </button>
               <button
                 onClick={() => handleNavClick("addQuestion")}
@@ -155,6 +167,10 @@ const App = () => {
         {activeComponent === "addQuestion" && (
           <AddQuestionForm dataSources={dataSources} />
         )}
+        {activeComponent === "timeComplexity" && (
+          <MainChart />
+        )}
+
         {activeComponent === "excel" && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 md:p-8">
