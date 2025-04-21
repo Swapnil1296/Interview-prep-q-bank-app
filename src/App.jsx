@@ -135,6 +135,15 @@ const App = () => {
                   Interview Questions
                 </button>
                 <button
+                  onClick={() => handleNavClick("timeComplexity")}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:cursor-pointer ${activeComponent === "timeComplexity"
+                    ? "bg-blue-600 text-white"
+                    : "bg-cyan-500 text-gray-700 hover:bg-blue-50"
+                    }`}
+                >
+                  Time Complexity
+                </button>
+                <button
                   onClick={() => handleNavClick("addQuestion")}
                   className={`w-full text-left px-3 py-2 rounded-md text-base font-medium ${activeComponent === "addQuestion"
                       ? "bg-blue-600 text-white"

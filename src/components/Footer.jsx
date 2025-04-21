@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
         {/* Reserved Rights */}
         <p className="text-sm">
-          © 2025 Your Company. All rights reserved @Swapnil
+          © 2025 Your Company. All rights reserved <a href="https://www.linkedin.com/in/swapnil-landage/" target="_blank" className="hover:underline">@Swapnil</a> 
         </p>
 
         {/* Phone Number */}
